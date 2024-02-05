@@ -13,6 +13,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173") // Allow CORS for all endpoints in this controller
 public class FitnessDataController {
 
+    // private final FitnessDataCollectionRepository repository;
     private final FitnessDataRepository repository;
 
     public FitnessDataController(FitnessDataRepository repository) {
@@ -52,6 +53,6 @@ public class FitnessDataController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
-        repository.delete(id);
+        repository.deleteById(id);
     }
 }

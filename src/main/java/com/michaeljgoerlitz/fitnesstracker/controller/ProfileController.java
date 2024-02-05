@@ -2,6 +2,7 @@ package com.michaeljgoerlitz.fitnesstracker.controller;
 
 import com.michaeljgoerlitz.fitnesstracker.model.Profile;
 import com.michaeljgoerlitz.fitnesstracker.repository.ProfileCollectionRepository;
+import com.michaeljgoerlitz.fitnesstracker.repository.ProfileRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,9 +15,10 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:5173") // Allow CORS for all endpoints in this controller
 public class ProfileController {
 
-    private final ProfileCollectionRepository repository;
+    // private final ProfileCollectionRepository repository;
+    private final ProfileRepository repository;
 
-    public ProfileController(ProfileCollectionRepository repository) {
+    public ProfileController(ProfileRepository repository) {
         this.repository = repository;
     }
 
@@ -48,6 +50,6 @@ public class ProfileController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
-        repository.delete(id);
+        repository.deleteById(id);
     }
 }
