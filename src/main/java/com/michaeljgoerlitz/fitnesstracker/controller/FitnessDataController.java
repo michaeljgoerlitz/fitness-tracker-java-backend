@@ -9,11 +9,10 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/fitness")
+@RequestMapping("/api/fitness")
 @CrossOrigin(origins = "http://localhost:5173") // Allow CORS for all endpoints in this controller
 public class FitnessDataController {
 
-    // private final FitnessDataCollectionRepository repository;
     private final FitnessDataRepository repository;
 
     public FitnessDataController(FitnessDataRepository repository) {

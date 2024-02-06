@@ -1,49 +1,47 @@
 package com.michaeljgoerlitz.fitnesstracker.controller;
 
-import com.michaeljgoerlitz.fitnesstracker.model.Profile;
-import com.michaeljgoerlitz.fitnesstracker.repository.ProfileCollectionRepository;
-import com.michaeljgoerlitz.fitnesstracker.repository.ProfileRepository;
+import com.michaeljgoerlitz.fitnesstracker.model.Workout;
+import com.michaeljgoerlitz.fitnesstracker.repository.WorkoutRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/profiles")
-@CrossOrigin(origins = "http://localhost:5173") // Allow CORS for all endpoints in this controller
-public class ProfileController {
+@RequestMapping("/api/workouts")
+@CrossOrigin(origins = "http://localhost:5173")
+public class WorkoutController {
 
-    private final ProfileRepository repository;
+    private final WorkoutRepository repository;
 
-    public ProfileController(ProfileRepository repository) {
+    public WorkoutController(WorkoutRepository repository) {
         this.repository = repository;
     }
 
     @GetMapping("")
-    public List<Profile> findAll() {
+    public List<Workout> findAll() {
         return repository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Profile findById(@PathVariable Integer id) {
+    public Workout findById(@PathVariable Integer id) {
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found!"));
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    public void create(@RequestBody Profile profile) {
-        repository.save(profile);
+    public void create(@RequestBody Workout workout) {
+        repository.save(workout);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    public void update(@RequestBody Profile profile, @PathVariable Integer id) {
+    public void update(@RequestBody Workout workout, @PathVariable Integer id) {
         if (!repository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found");
         }
-        repository.save(profile);
+        repository.save(workout);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -51,4 +49,5 @@ public class ProfileController {
     public void delete(@PathVariable Integer id) {
         repository.deleteById(id);
     }
+
 }
